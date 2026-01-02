@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\CampaignController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ArticleController;
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\DonationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -10,6 +12,8 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::apiResource('donations', DonationController::class);
+Route::apiResource('categories', CategoryController::class);
+Route::apiResource('articles', ArticleController::class);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);

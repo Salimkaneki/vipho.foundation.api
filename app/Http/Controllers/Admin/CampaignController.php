@@ -15,6 +15,7 @@ class CampaignController extends Controller
     public function index()
     {
         $campaigns = Campaign::with('creator')->where('status', 'active')->get();
+
         return response()->json($campaigns);
     }
 
@@ -51,6 +52,7 @@ class CampaignController extends Controller
     public function show(string $id)
     {
         $campaign = Campaign::with(['creator', 'donations'])->findOrFail($id);
+
         return response()->json($campaign);
     }
 

@@ -20,6 +20,7 @@ class DonationController extends Controller
         } else {
             $donations = Donation::with('donor', 'campaign')->get();
         }
+
         return response()->json($donations);
     }
 
@@ -51,7 +52,7 @@ class DonationController extends Controller
         $data = $request->only([
             'type', 'amount', 'currency', 'description', 'quantity', 'category',
             'message', 'is_anonymous', 'donor_name', 'donor_email', 'campaign_id',
-            'first_name', 'last_name', 'phone', 'payment_type', 'deposit_number', 'location'
+            'first_name', 'last_name', 'phone', 'payment_type', 'deposit_number', 'location',
         ]);
 
         // Si connecté, lier au user
@@ -76,6 +77,7 @@ class DonationController extends Controller
     public function show(string $id)
     {
         $donation = Donation::with('donor', 'campaign')->findOrFail($id);
+
         return response()->json($donation);
     }
 
