@@ -21,6 +21,12 @@ class Donation extends Model
         'campaign_id',
         'payment_method',
         'status',
+        'first_name',
+        'last_name',
+        'phone',
+        'payment_type',
+        'deposit_number',
+        'location',
     ];
 
     public function donor()

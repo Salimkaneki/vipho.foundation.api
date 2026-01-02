@@ -40,11 +40,18 @@ class DonationController extends Controller
             'donor_name' => 'nullable|string',
             'donor_email' => 'nullable|email',
             'campaign_id' => 'required|exists:campaigns,id',
+            'first_name' => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'payment_type' => 'nullable|in:mix_by_yas,moov_money,other',
+            'deposit_number' => 'nullable|string|max:50',
+            'location' => 'nullable|string',
         ]);
 
         $data = $request->only([
             'type', 'amount', 'currency', 'description', 'quantity', 'category',
-            'message', 'is_anonymous', 'donor_name', 'donor_email', 'campaign_id'
+            'message', 'is_anonymous', 'donor_name', 'donor_email', 'campaign_id',
+            'first_name', 'last_name', 'phone', 'payment_type', 'deposit_number', 'location'
         ]);
 
         // Si connecté, lier au user
