@@ -22,6 +22,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        if (auth()->user()->role !== 'admin') {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
         $request->validate([
             'name' => 'required|string|max:255|unique:categories',
             'description' => 'nullable|string',
@@ -46,6 +50,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if (auth()->user()->role !== 'admin') {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
         $category = Category::findOrFail($id);
 
         $request->validate([
@@ -63,6 +71,10 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
+        if (auth()->user()->role !== 'admin') {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
         $category = Category::findOrFail($id);
         $category->delete();
 

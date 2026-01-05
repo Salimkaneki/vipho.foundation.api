@@ -27,6 +27,10 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        if (auth()->user()->role !== 'admin') {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
@@ -54,6 +58,10 @@ class ArticleController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if (auth()->user()->role !== 'admin') {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
         $article = Article::findOrFail($id);
 
         $request->validate([
@@ -74,6 +82,10 @@ class ArticleController extends Controller
      */
     public function destroy(string $id)
     {
+        if (auth()->user()->role !== 'admin') {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
         $article = Article::findOrFail($id);
         $article->delete();
 
