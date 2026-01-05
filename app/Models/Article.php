@@ -9,9 +9,13 @@ class Article extends Model
     protected $fillable = [
         'title',
         'content',
-        'category_id',
+        'excerpt',
+        'slug',
         'image',
         'published_at',
+        'author_id',
+        'category_id',
+        'status',
     ];
 
     public function author()

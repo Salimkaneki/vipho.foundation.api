@@ -12,11 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('articles', function (Blueprint $table) {
-            $table->string('title');
-            $table->text('content');
-            $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('set null');
-            $table->string('image')->nullable();
-            $table->timestamp('published_at')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
         });
     }
 
@@ -27,7 +23,6 @@ return new class extends Migration
     {
         Schema::table('articles', function (Blueprint $table) {
             $table->dropForeign(['category_id']);
-            $table->dropColumn(['title', 'content', 'category_id', 'image', 'published_at']);
         });
     }
 };
